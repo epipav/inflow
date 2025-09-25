@@ -1,0 +1,13 @@
+commands:
+    -   name: frontend
+        description: Run commands for Nuxt frontend
+        children:
+            -   name: start
+                description: Start the frontend nuxt app
+                command: cd frontend && pnpm i --ignore-workspace && pnpm dev
+            -   name: docs-components
+                description: Opens the documentation for components
+                command: cd frontend && pnpm i --ignore-workspace && pnpm storybook
+            -   name: lint
+                description: Opens the documentation for tailwindcss
+                command: cd frontend && pnpm i --ignore-workspace && pnpm lint:fix && pnpm tsc-check
