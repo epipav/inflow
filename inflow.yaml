@@ -11,3 +11,21 @@ commands:
             -   name: lint
                 description: Opens the documentation for tailwindcss
                 command: cd frontend && pnpm i --ignore-workspace && pnpm lint:fix && pnpm tsc-check
+    -   name: db
+        description:
+        children:
+            -   name: up
+                description: Scaffold the Postgres database
+                command: |
+                    docker run -d \
+                    --name postgres-insights \
+                    --restart unless-stopped \
+                    -e POSTGRES_PASSWORD=insights \
+                    -e POSTGRES_DB=insights \
+                    -p 5432:5432 \
+                    -v pgdata-dev:/var/lib/postgresql/data \
+                    --shm-size=1g \
+                    postgres:14-alpine
+            -   name: migrate
+                description: Run migrations on the Postgres database
+                command: ./database/migrate.sh
